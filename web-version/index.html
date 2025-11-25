@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#007AFF">
+    <title>Pénzügy Elemző</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Pénzügy Elemző</h1>
+        </header>
+
+        <main>
+            <!-- Alap adatok -->
+            <section class="card">
+                <h2>Alap adatok</h2>
+                <div class="input-group">
+                    <label>Jelenlegi tőke egyenleg:</label>
+                    <input type="number" id="capitalBalance" placeholder="0" step="1000">
+                    <span class="currency">Ft</span>
+                </div>
+                <div class="input-group">
+                    <label>Szabad felhasználású diákhitel egyenleg:</label>
+                    <input type="number" id="studentLoanBalance" placeholder="0" step="1000">
+                    <span class="currency">Ft</span>
+                </div>
+            </section>
+
+            <!-- Új fix kiadás/bevétel -->
+            <section class="card">
+                <h2>Új fix kiadás/bevétel</h2>
+                <div class="toggle-group">
+                    <label class="switch">
+                        <input type="checkbox" id="isIncome">
+                        <span class="slider"></span>
+                        <span class="label-text">Bevétel</span>
+                    </label>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="amount" placeholder="Összeg" step="100">
+                    <select id="categorySelect">
+                        <option value="">Válassz kategóriát</option>
+                    </select>
+                    <button onclick="addTransaction()" class="btn-primary">Hozzáad</button>
+                </div>
+            </section>
+
+            <!-- Új kategória -->
+            <section class="card">
+                <h2>Új kategória hozzáadása</h2>
+                <div class="input-group">
+                    <input type="text" id="newCategory" placeholder="Kategória név">
+                    <button onclick="addCategory()" class="btn-primary">Hozzáad</button>
+                </div>
+            </section>
+
+            <!-- Fix kiadások és bevételek listája -->
+            <section class="card">
+                <h2>Fix kiadások és bevételek listája</h2>
+                <div id="transactionsList" class="transactions-list">
+                    <p class="empty-state">Még nincsenek tranzakciók</p>
+                </div>
+            </section>
+
+            <!-- Diákhitel tartozás jövőbeli alakulása -->
+            <section class="card">
+                <h2>Diákhitel tartozás jövőbeli alakulása</h2>
+                <canvas id="loanChart"></canvas>
+            </section>
+        </main>
+
+        <footer>
+            <p>Adatok a böngésző helyi tárolójában vannak mentve</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
